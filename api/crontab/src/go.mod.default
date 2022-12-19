@@ -1,0 +1,26 @@
+module sports-game-cron
+
+go 1.16
+
+require (
+	github.com/Shopify/sarama v1.27.2
+	github.com/frankban/quicktest v1.11.3 // indirect
+	github.com/go-sql-driver/mysql v1.5.0
+	github.com/go-xorm/xorm v0.7.9
+	github.com/imroc/req v0.3.0
+	github.com/mailru/easyjson v0.7.7 // indirect
+	github.com/olivere/elastic v6.2.35+incompatible
+	github.com/pierrec/lz4 v2.6.0+incompatible // indirect
+	github.com/rcrowley/go-metrics v0.0.0-20201227073835-cf1acfcdf475 // indirect
+	github.com/robfig/cron/v3 v3.0.1
+	sports-common v0.0.0-00010101000000-000000000000
+	sports-game-api v0.0.0-00010101000000-000000000000
+	sports-models v0.0.0-00010101000000-000000000000
+	xorm.io/builder v0.3.6
+)
+
+replace (
+	sports-common => ../../common/src/
+	sports-game-api => ../../game-api/src/
+	sports-models => ../../models/src/
+)
