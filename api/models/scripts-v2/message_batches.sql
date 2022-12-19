@@ -1,0 +1,26 @@
+DROP TABLE IF EXISTS `message_batches`;
+CREATE TABLE `message_batches` (
+    `id` int unsigned NOT NULL AUTO_INCREMENT,
+    `merchant_id` int unsigned NOT NULL DEFAULT '0' COMMENT '商户编号',
+    `merchant_name` varchar(32) NOT NULL DEFAULT '' COMMENT '商户名称',
+    `app_id` int unsigned NOT NULL DEFAULT '0' COMMENT '管理员编号',
+    `app_name` varchar(32) NOT NULL DEFAULT '' COMMENT '管理员名称',
+    `channel_id` int not null default 0 comment '渠道编号',
+    `phone_list` text comment '批量号码',
+    `country_id` int not null default 0 comment '国家编号',
+    `template_id` int unsigned not null default 0 comment '模板编号',
+    `state` tinyint unsigned not null default 0 comment '状态',
+    `plan_time` bigint not null default 0 comment '发送时间',
+    `finished` bigint not null default 0 comment '完成时间',
+    `content` varchar(256) not null default '' comment '内容',
+    `created` bigint unsigned NOT NULL DEFAULT '0' COMMENT '添加时间',
+    `updated` bigint unsigned NOT NULL DEFAULT '0' COMMENT '修改时间',
+    `remark` varchar(20) NOT NULL DEFAULT '' COMMENT '备注',
+    PRIMARY KEY (`id`),
+    INDEX(merchant_id),
+    INDEX(app_id),
+    INDEX(channel_id),
+    INDEX(country_id),
+    INDEX(template_id),
+    INDEX(state)
+) ENGINE=InnoDB AUTO_INCREMENT=100000 DEFAULT CHARSET=utf8mb3;
