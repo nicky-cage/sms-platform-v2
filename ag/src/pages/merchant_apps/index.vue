@@ -19,7 +19,7 @@
                 </a-form-model-item>
             </a-form-model>
             <div class="btns">
-                <a-button type="primary" @click="recordCreate">添加应用</a-button>
+                <a-button type="primary" @click="rowCreate">添加应用</a-button>
             </div>
         </div>
 
@@ -83,13 +83,14 @@ export default {
             },
             columns: [
                 {title: "ID", dataIndex: 'id', width: 80},
-                {title: "商户名称", dataIndex: 'merchant_name', width: 150},
+                {title: "商户名称", dataIndex: 'merchant_name', width: 120},
                 {title: "应用名称", dataIndex: 'name', width: 150},
                 {title: "状态", dataIndex: 'state', scopedSlots: {customRender: 'status'}, width: 60},
                 {title: "授权IP", dataIndex: 'allow_ip', width: 250},
+                {title: "应用密钥", dataIndex: 'app_key', width: 300},
                 {title: "备注", dataIndex: 'remark' },
                 {title: "添加时间", dataIndex: 'created', scopedSlots: {customRender: 'created'}, width: 145},
-                {title: "修改时间", dataIndex: 'updated', scopedSlots: {customRender: 'updated'}, width: 140},
+                {title: "最后修改", dataIndex: 'updated', scopedSlots: {customRender: 'updated'}, width: 145},
                 {title: "操作", dataIndex: 'action', scopedSlots: {customRender: 'action'}, width: 60},
             ],
             tableList: [],
@@ -126,7 +127,7 @@ export default {
             this.pagination.current = 1;
             this.getTableData();
         },
-        recordCreate() {
+        rowCreate() {
             let currentTime = new Date();
             let minute = currentTime.getMinutes();
             let second = currentTime.getSeconds();
@@ -138,7 +139,7 @@ export default {
             this.title = '新增记录';
             this.visible = true;
         },
-        recordUpdate(r) {
+        rowUpdate(r) {
             this.is_creating = false;
             this.title = '修改记录';
             this.form.id = r.id

@@ -50,7 +50,12 @@
                     <td>应用编号, 必填</td>
                 </tr>
                 <tr>
-                    <td>send_number</td>
+                    <td>sender_number</td>
+                    <td>string</td>
+                    <td>手机号码</td>
+                </tr>
+                <tr>
+                    <td>receiver_number</td>
                     <td>string</td>
                     <td>手机号码</td>
                 </tr>
@@ -78,7 +83,8 @@
 <pre class="layui-code">
 {
     "app_id": 168000,
-    "send_number":"1.23",
+    "send_number":"83912399",
+    "send_number":"861923123",
     "content":"1.23",
     "notify_url":"1.23",
     "sign":"0e63c8fa39f5c983010035a7d1d30e52",

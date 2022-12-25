@@ -5,7 +5,7 @@
                 <img alt="logo" class="logo" src="@/assets/img/logo.png"/>
                 <span class="title">{{ systemName }}</span>
             </div>
-            <div class="desc">后台管理系统 | Backend Management System</div>
+            <div class="desc">商户后台管理系统 | Merchant Backend Management System</div>
         </div>
         <div class="login">
             <a-form :form="form" @submit="onSubmit">

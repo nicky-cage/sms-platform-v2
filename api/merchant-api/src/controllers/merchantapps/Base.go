@@ -8,6 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"merchant-api/controllers/actions"
 	"models"
+	"strings"
 )
 
 // Index 列表
@@ -20,6 +21,10 @@ var Index = &actions.List[models.MerchantApp]{
 
 var Save = actions.Save{
 	Model: models.MerchantApps,
+	CreateBefore: func(context *gin.Context, data *map[string]interface{}) error {
+		(*data)["app_key"] = strings.ToUpper(utils.GetRandString(32)) // 生成 app key
+		return nil
+	},
 	SaveBefore: func(c *gin.Context, data *map[string]interface{}) error {
 		platform := request.GetPlatform(c)
 		rConn := cache.Get(platform)

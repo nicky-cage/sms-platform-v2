@@ -88,12 +88,16 @@ func (ths *MessageChannel) Send(phone, content, ani string) string {
 	}
 
 	fmt.Println("---------- 发送短信 -------------")
+	fmt.Println("URL:", requestURL)
 	ffmt.Puts(params)
 	result, err := request.Get(requestURL, params)
 	if err != nil {
 		fmt.Println("发送短信有误:", err)
 		return err.Error()
 	}
+
+	fmt.Println("---------- 发送结果 -------------")
+	ffmt.Puts(result)
 
 	return result
 }

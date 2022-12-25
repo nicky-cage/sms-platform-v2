@@ -89,13 +89,13 @@ var CUG4 = CUGSender{
 var CUG5 = CUGSender{
 	ProductType: "MKT_LT",
 	ChannelName: "MKT_LT",
-	ChannelType: "SMPP",
+	ChannelType: "HTTP",
 	Path:        "/api",
 	IPList: []string{
 		"203.160.95.115",
 		"47.242.200.116",
-		"100.21.8.223",
-		"3.39.157.142",
+		// "100.21.8.223",
+		// "3.39.157.142",
 	},
 	Port:      8001,
 	Account:   "Deb1219mktm",

@@ -27,6 +27,7 @@ func Get(queryURL string, data ...map[string]string) (string, error) {
 		baseURL.RawQuery = params.Encode()
 	}
 	realURL := baseURL.String()
+	fmt.Println("URL: ", realURL)
 	res, err := http.Get(realURL)
 	if err != nil {
 		return "", err

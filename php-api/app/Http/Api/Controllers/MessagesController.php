@@ -12,7 +12,7 @@ use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\View\RenderInterface;
 use Psr\Http\Message\ResponseInterface;
 
-#[Controller(prefix: "/v1")]
+#[Controller(prefix: "/v2")]
 class MessagesController extends BaseController
 {
 
