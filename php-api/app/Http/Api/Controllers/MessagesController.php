@@ -238,7 +238,7 @@ class MessagesController extends BaseController
         if (!$merchantAcc) {
             return '无法获取商户账户信息';
         }
-        if ($merchantAcc->remain < 1) {
+        if ($merchantAcc->count_remain < 1) {
             return '商户可用余额不足';
         }
 
@@ -276,7 +276,8 @@ class MessagesController extends BaseController
             'app_name' => $merchantApp->name,
             'order_number' => $orderNumber,
             'country_id' => $country->id,
-            'phone' => $postedData['receiver_number'],
+            'phone' => trim($postedData['receiver_number']),
+            'sender_number' => trim($postedData['sender_number'] ?? ''),
             'phone_prefix' => $country->phone_prefix,
             'phone_full' => $phoneFull,
             'created' => time(),
@@ -289,8 +290,8 @@ class MessagesController extends BaseController
             'id' => $merchantAcc->id,
             'merchant_d' => $merchant->id,
         ])->update([
-            'remain' => $merchantAcc->remain - 1,
-            'frozen' => $merchantAcc->frozen + 1,
+            'count_remain' => $merchantAcc->remain - 1,
+            'count_frozen' => $merchantAcc->frozen + 1,
         ]);
         Message::pushForSend($savingData);
 
