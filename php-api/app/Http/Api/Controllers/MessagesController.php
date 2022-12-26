@@ -294,7 +294,9 @@ class MessagesController extends BaseController
             'count_remain' => $merchantAcc->count_remain - 1,
             'count_frozen' => $merchantAcc->count_frozen + 1,
         ]);
-        Message::pushForSend($savingData);
+
+        $row = Message::query()->where(['order_number' => $orderNumber])->first();
+        Message::pushForSend($row);
 
         $returnData = [
             'order_number' => $orderNumber,
