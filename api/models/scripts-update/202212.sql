@@ -40,3 +40,5 @@ alter table messages
     add notify_failure tinyint not null default 0 comment '通知次数';
 alter table messages
     add notify_confired bigint not null default 0 comment '确认时间';
+alter table messages
+    add sender_number varchar(32) not null default '' comment '发送号码';

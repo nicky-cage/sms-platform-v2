@@ -6,7 +6,7 @@ namespace App\Http\Api\Controllers;
 
 use App\Common\{Utils};
 use App\Http\Api\Common\BasePay;
-use App\Model\{MerchantApp, MerchantCountryRate, Message, Country, MessageTemplate, Merchant};
+use App\Model\{MerchantApp, MerchantAccount, Message, Country, MessageTemplate, Merchant};
 use Hyperf\HttpServer\Annotation\{Controller, GetMapping, RequestMapping};
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\View\RenderInterface;
@@ -231,6 +231,17 @@ class MessagesController extends BaseController
             return '无法获取商户配置国家相关信息';
         }
 
+        // 检测账号余额
+        $merchantAcc = MerchantAccount::query()->where([
+            'merchant_id' => $merchant->id,
+        ])->first();
+        if (!$merchantAcc) {
+            return '无法获取商户账户信息';
+        }
+        if ($merchantAcc->remain < 1) {
+            return '商户可用余额不足';
+        }
+
         $country = Country::query()->where([
             'id' => $countryRow->country_id,
             'is_support' => 1,
@@ -274,6 +285,13 @@ class MessagesController extends BaseController
             'notify_url' => trim($postedData['notify_url'] ?? ''),
         ];
         (new Message())->insert($savingData);
+        DB::table('merchant_accounts')->where([
+            'id' => $merchantAcc->id,
+            'merchant_d' => $merchant->id,
+        ])->update([
+            'remain' => $merchantAcc->remain - 1,
+            'frozen' => $merchantAcc->frozen + 1,
+        ]);
         Message::pushForSend($savingData);
 
         $returnData = [

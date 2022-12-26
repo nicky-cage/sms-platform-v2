@@ -9,11 +9,25 @@ import (
 	"merchant-api/controllers/actions"
 	"models"
 	"strings"
+	"xorm.io/builder"
 )
 
 // Index 列表
 var Index = &actions.List[models.MerchantApp]{
 	Model: models.MerchantApps,
+	GetQueryCond: func(c *gin.Context) builder.Cond {
+		cond := builder.NewCond()
+		platform := request.GetPlatform(c)
+		rConn := cache.Get(platform)
+		defer cache.Restore(platform, rConn)
+
+		token := request.GetAuthorization(c)
+		if merchant := models.Merchants.GetByToken(rConn, token); merchant != nil {
+			cond = cond.And(builder.Eq{"merchant_id": merchant.ID})
+		}
+
+		return cond
+	},
 	OrderBy: func(c *gin.Context) string {
 		return "created DESC"
 	},

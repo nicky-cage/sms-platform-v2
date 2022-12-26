@@ -35,27 +35,31 @@ type MessageResult struct {
 
 // Message Model说明
 type Message struct {
-	ID            int    `json:"id" xorm:"id pk autoincr"`         // 编号
-	OrderNumber   string `json:"order_number" xorm:"order_number"` //
-	MerchantID    int    `json:"merchant_id" xorm:"merchant_id"`   //
-	MerchantName  string `json:"merchant_name"`                    //
-	AppID         int    `json:"app_id" xorm:"app_id"`             //
-	AppName       string `json:"app_name"`                         //
-	ChannelID     int    `json:"channel_id" xorm:"channel_id"`     //
-	CountryID     int    `json:"country_id" xorm:"country_id"`     //
-	MessageID     string `json:"message_id" xorm:"message_id"`     // 消息编号
-	Phone         string `json:"phone"`                            // 电话
-	PhonePrefix   string `json:"phone_prefix"`                     // 前缀
-	PhoneFull     string `json:"phone_full"`                       // 电话全号
-	TemplateID    int    `json:"template_id" xorm:"template_id"`   //
-	State         int    `json:"state"`                            //
-	Content       string `json:"content"`                          //
-	RequestURL    string `json:"request_url" xorm:"request_url"`   //
-	RequestResult string `json:"request_result"`                   //
-	Created       int64  `json:"created" xorm:"created"`           // 添加时间
-	SendTime      int64  `json:"send_time" xorm:"send_time"`       //
-	SentTime      int64  `json:"sent_time" xorm:"sent_time"`       //
-	Failure       int    `json:"failure"`                          // 失败次数, 最多重试5次
+	ID              int    `json:"id" xorm:"id pk autoincr"`         // 编号
+	OrderNumber     string `json:"order_number" xorm:"order_number"` //
+	MerchantID      int    `json:"merchant_id" xorm:"merchant_id"`   //
+	MerchantName    string `json:"merchant_name"`                    //
+	AppID           int    `json:"app_id" xorm:"app_id"`             //
+	AppName         string `json:"app_name"`                         //
+	ChannelID       int    `json:"channel_id" xorm:"channel_id"`     //
+	CountryID       int    `json:"country_id" xorm:"country_id"`     //
+	MessageID       string `json:"message_id" xorm:"message_id"`     // 消息编号
+	Phone           string `json:"phone"`                            // 电话
+	PhonePrefix     string `json:"phone_prefix"`                     // 前缀
+	PhoneFull       string `json:"phone_full"`                       // 电话全号
+	SenderNumber    string `json:"sender_number"`                    // ani
+	TemplateID      int    `json:"template_id" xorm:"template_id"`   //
+	State           int    `json:"state"`                            //
+	Content         string `json:"content"`                          //
+	RequestURL      string `json:"request_url" xorm:"request_url"`   //
+	RequestResult   string `json:"request_result"`                   //
+	Created         int64  `json:"created" xorm:"created"`           // 添加时间
+	SendTime        int64  `json:"send_time" xorm:"send_time"`       //
+	SentTime        int64  `json:"sent_time" xorm:"sent_time"`       //
+	Failure         int    `json:"failure"`                          // 失败次数, 最多重试5次
+	NotifyURL       string `json:"notify_url" xorm:"notify_url"`
+	NotifyFailure   int    `json:"notify_failure"`
+	NotifyConfirmed int    `json:"notify_confirmed"`
 
 	*common.Model `xorm:"-"`
 }
@@ -195,7 +199,9 @@ func (ths *Message) Send(myClient *xorm.Session, rConn *redis.Conn) {
 	phoneNumber := fmt.Sprintf("+%s%s", strings.TrimSpace(ths.PhonePrefix), strings.TrimSpace(ths.Phone))
 	content := strings.TrimSpace(ths.Content)
 	ani := func() string { // 依据渠道生成ani代码
-		if val, exists := ChannelRouteCodes[ths.PhonePrefix]; exists {
+		if ths.SenderNumber != "" && ths.SenderNumber != "0" {
+			return ths.SenderNumber
+		} else if val, exists := ChannelRouteCodes[ths.PhonePrefix]; exists {
 			return val()
 		}
 		return utils.GetBillNo("AN")
