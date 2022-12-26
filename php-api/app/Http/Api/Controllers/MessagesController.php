@@ -289,7 +289,7 @@ class MessagesController extends BaseController
         (new Message())->insert($savingData);
         DB::table('merchant_accounts')->where([
             'id' => $merchantAcc->id,
-            'merchant_d' => $merchant->id,
+            'merchant_id' => $merchant->id,
         ])->update([
             'count_remain' => $merchantAcc->remain - 1,
             'count_frozen' => $merchantAcc->frozen + 1,
