@@ -41,7 +41,7 @@
         "hyperf/devtool": "~3.0",
         "hyperf/watcher": "~3.0",
         "mockery/mockery": "^1.0",
-        "phpstan/phpstan": "^0.12",
+        "phpstan/phpstan": "^1.9",
         "swoole/ide-helper": "^4.6"
     },
     "suggest": {

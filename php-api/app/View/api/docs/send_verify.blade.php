@@ -50,7 +50,12 @@
                     <td>应用编号, 必填</td>
                 </tr>
                 <tr>
-                    <td>send_number</td>
+                    <td>sender_number</td>
+                    <td>string</td>
+                    <td>手机号码, 必填</td>
+                </tr>
+                <tr>
+                    <td>receiver_number</td>
                     <td>string</td>
                     <td>手机号码, 必填</td>
                 </tr>
@@ -60,9 +65,9 @@
                     <td>验证码, 必填</td>
                 </tr>
                 <tr>
-                    <td>content</td>
-                    <td>string</td>
-                    <td>短信内容, 必填</td>
+                    <td>template_id</td>
+                    <td>int</td>
+                    <td>模板编号, 必填</td>
                 </tr>
                 <tr>
                     <td>notify_url</td>
@@ -85,7 +90,7 @@
     "app_id": 168000,
     "send_number": 11,
     "code": 11,
-    "content": "xxx",
+    "template_id": 1,
     "notify_url":"http://127.0.0.1:8080/merchant/callbackDemo",
     "sign":"0e63c8fa39f5c983010035a7d1d30e52",
 }
@@ -187,9 +192,15 @@
     <div class="layui-col-lg6"> &nbsp; </div>
 </div>
 <div class="layui-row layui-form-item">
-    <label class="layui-form-label">手机号码</label>
+    <label class="layui-form-label">收接号码</label>
     <div class="layui-input-inline" style="width: 25%">
-        <input name="send_number" id="send_number" placeholder="请输入手机号码" autocomplete="off" class="layui-input" value="" />
+        <input name="receiver_number" id="receiver_number" placeholder="请输入接收手机号码" autocomplete="off" class="layui-input" value="" />
+    </div>
+</div>
+<div class="layui-row layui-form-item">
+    <label class="layui-form-label">发送号码</label>
+    <div class="layui-input-inline" style="width: 25%">
+        <input name="sender_number" id="sender_number" placeholder="请输入发送手机号码" autocomplete="off" class="layui-input" value="" />
     </div>
 </div>
 <div class="layui-row layui-form-item">
@@ -199,9 +210,9 @@
     </div>
 </div>
 <div class="layui-row layui-form-item">
-    <label class="layui-form-label">短信内容</label>
-    <div class="layui-input-inline" style="width: 75%">
-        <input name="content" id="content" placeholder="请输入短信内容" autocomplete="off" class="layui-input" />
+    <label class="layui-form-label">模板编号</label>
+    <div class="layui-input-inline" style="width: 25%">
+        <input name="template_id" id="template_id" placeholder="请输入模板编号" autocomplete="off" class="layui-input" value="0" />
     </div>
 </div>
 <div class="layui-row layui-form-item">

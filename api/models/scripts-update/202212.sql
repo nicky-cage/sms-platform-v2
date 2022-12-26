@@ -31,3 +31,12 @@ select merchant_name, phone_prefix, phone, phone_full, message_id, content, FROM
 select merchant_name, phone_prefix, phone, phone_full, message_id, content, FROM_UNIXTIME(created / 1000000, '%Y-%m-%d %H:%I:%S')
     from messages 
     where merchant_id = 10019 INTO OUTFILE '/Users/ai/work/data/10019.txt';
+
+
+---
+
+alter table messages
+    add notify_url varchar(256) not null default '' comment '异步通知地址',
+    add notify_failure tinyint not null default 0 comment '通知次数';
+alter table messages
+    add notify_confired bigint not null default 0 comment '确认时间';

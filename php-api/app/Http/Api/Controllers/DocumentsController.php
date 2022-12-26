@@ -24,73 +24,73 @@ class DocumentsController extends BaseController
         '61.9.110.68',
     ];
 
-    #[RequestMapping(methods: 'GET, POST', path: 'index')]
+    #[RequestMapping(path: 'index', methods: 'GET, POST')]
     public function index(RequestInterface $request, RenderInterface $render): ResponseInterface
     {
         return self::render($request, $render, [], 'docs/main');
     }
 
-    #[RequestMapping(methods: 'GET, POST', path: 'intro')]
+    #[RequestMapping(path: 'intro', methods: 'GET, POST')]
     public function intro(RequestInterface $request, RenderInterface $render): ResponseInterface
     {
         return self::render($request, $render, [], 'docs/intro');
     }
 
-    #[RequestMapping(methods: 'GET, POST', path: 'api_intro')]
+    #[RequestMapping(path: 'api_intro', methods: 'GET, POST')]
     public function apiIntroduce(RequestInterface $request, RenderInterface $render): ResponseInterface
     {
         return self::render($request, $render, [], 'docs/api_intro');
     }
 
-    #[RequestMapping(methods: 'GET, POST', path: 'error_codes')]
+    #[RequestMapping(path: 'error_codes', methods: 'GET, POST')]
     public function errorCodes(RequestInterface $request, RenderInterface $render): ResponseInterface
     {
         return self::render($request, $render, [], 'docs/error_codes');
     }
 
-    #[RequestMapping(methods: 'GET, POST', path: 'sign')]
+    #[RequestMapping(path: 'sign', methods: 'GET, POST')]
     public function sign(RequestInterface $request, RenderInterface $render): ResponseInterface
     {
         return self::render($request, $render, [], 'docs/sign');
     }
 
-    #[RequestMapping(methods: 'GET, POST', path: 'send_message')]
+    #[RequestMapping(path: 'send_message', methods: 'GET, POST')]
     public function recharge(RequestInterface $request, RenderInterface $render): ResponseInterface
     {
         return self::render($request, $render, array_merge([
-            'url' => self::getAPIDomain() . '/v1/send_message',
+            'url' => self::getAPIDomain() . '/v2/send_message',
         ], self::getViewData($request)), 'docs/send_message');
     }
 
-    #[RequestMapping(methods: 'GET, POST', path: 'send_verify')]
+    #[RequestMapping(path: 'send_verify', methods: 'GET, POST')]
     public function withdraw(RequestInterface $request, RenderInterface $render): ResponseInterface
     {
         return self::render($request, $render, array_merge([
-            'url' => self::getAPIDomain() . '/v1/send_verify',
+            'url' => self::getAPIDomain() . '/v2/send_verify',
         ], self::getViewData($request)), 'docs/send_verify');
     }
 
-    #[RequestMapping(methods: 'GET, POST', path: 'message_query')]
+    #[RequestMapping(path: 'message_query', methods: 'GET, POST')]
     public function messageQuery(RequestInterface $request, RenderInterface $render): ResponseInterface
     {
         return self::render($request, $render, array_merge([
-            'url' => self::getAPIDomain() . '/v1/message_query',
+            'url' => self::getAPIDomain() . '/v2/message_query',
         ], self::getViewData($request)), 'docs/message_query');
     }
 
-    #[RequestMapping(methods: 'GET, POST', path: 'info')]
+    #[RequestMapping(path: 'info', methods: 'GET, POST')]
     public function fee(RequestInterface $request, RenderInterface $render): ResponseInterface
     {
         return self::render($request, $render, array_merge([
-            'url' => self::getAPIDomain() . '/v1/info',
+            'url' => self::getAPIDomain() . '/v2/info',
         ], self::getViewData($request)), 'docs/info');
     }
 
-    #[RequestMapping(methods: 'GET, POST', path: 'balance')]
+    #[RequestMapping(path: 'balance', methods: 'GET, POST')]
     public function balance(RequestInterface $request, RenderInterface $render): ResponseInterface
     {
         return self::render($request, $render, array_merge([
-            'url' => self::getAPIDomain() . '/v1/balance',
+            'url' => self::getAPIDomain() . '/v2/balance',
         ], self::getViewData($request)), 'docs/balance');
     }
 
@@ -108,8 +108,8 @@ class DocumentsController extends BaseController
     {
         $clientIP = Utils::clientIP($request);
         $remoteArr = [
-            'app_id' => '348193',
-            'app_key' => 'q2m7zCZYWc4IkVb1vaoiWzdYuGxhVL5g',
+            'app_id' => '100002',
+            'app_key' => 'AHPLVWM78CTYW3EZMTRTLGDP3FFR2MOK',
         ];
         if (in_array($clientIP, self::ALLOW_IP)) {
             if (config('env_mode') == 'local') {

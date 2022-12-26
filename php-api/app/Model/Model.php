@@ -91,7 +91,11 @@ abstract class Model extends BaseModel implements CacheableInterface
     {
     }
 
-    public static function findByID($id)
+    /**
+     * @param $id
+     * @return \Hyperf\Database\Model\Builder|\Hyperf\Database\Model\Model|object|null
+     */
+    public static function findByID($id): Model
     {
         return self::where(['id' => $id])->first();
     }

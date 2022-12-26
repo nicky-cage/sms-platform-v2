@@ -8,6 +8,8 @@ use Hyperf\Utils\ApplicationContext;
 use Hyperf\Redis\Redis;
 use App\Model\Model;
 use Hyperf\Utils\Coroutine;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class Cache
 {
@@ -19,6 +21,8 @@ class Cache
     /**
      * 返回redis客户端, 为了方便使用编辑器的代码提示,不再继续简化
      * @return Redis
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     public static function get(): Redis
     {
@@ -34,7 +38,9 @@ class Cache
      * @param string $modelName
      * @param int $id
      * @param int $timeout
-     * @return Model|NULL
+     * @return Model
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     public static function getModelById(string $modelName, int $id, int $timeout = 86400): Model
     {

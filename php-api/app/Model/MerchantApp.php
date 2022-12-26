@@ -9,10 +9,11 @@ use Hyperf\Utils\Str;
 /**
  * @property int $id
  * @property int $merchant_id
+ * @property string $merchant_name
  * @property string $name
  * @property string $app_key
  * @property int $state
- * @property stirng $allow_ips
+ * @property stirng $allow_ip
  * @property int $pay_in
  * @property int $pay_out
  * @property string $remark

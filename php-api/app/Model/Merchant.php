@@ -29,8 +29,8 @@ use Hyperf\Utils\Str;
  * @property int $sort
  * @property string $remark
  * @property int $google_verify
- * @property string $current_ip
- * @property float $rate
+ * @property string $country_list
+ * @property float $channel_list
  */
 class Merchant extends Model
 {

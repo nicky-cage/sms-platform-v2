@@ -52,12 +52,12 @@
                 <tr>
                     <td>sender_number</td>
                     <td>string</td>
-                    <td>手机号码</td>
+                    <td>发送号码</td>
                 </tr>
                 <tr>
                     <td>receiver_number</td>
                     <td>string</td>
-                    <td>手机号码</td>
+                    <td>接收号码</td>
                 </tr>
                 <tr>
                     <td>content</td>
@@ -187,9 +187,15 @@
     <div class="layui-col-lg6"> &nbsp; </div>
 </div>
 <div class="layui-row layui-form-item">
-    <label class="layui-form-label">手机号码</label>
+    <label class="layui-form-label">接收号码</label>
     <div class="layui-input-inline" style="width: 25%">
-        <input name="send_number" id="send_number" placeholder="请输入手机号码" autocomplete="off" class="layui-input" value="{{mt_rand(100, 999)}}" />
+        <input name="receiver_number" id="receiver_number" placeholder="请输入接收手机号码" autocomplete="off" class="layui-input" value="{{mt_rand(100, 999)}}" />
+    </div>
+</div>
+<div class="layui-row layui-form-item">
+    <label class="layui-form-label">发送号码</label>
+    <div class="layui-input-inline" style="width: 25%">
+        <input name="sender_number" id="sender_number" placeholder="请输入手机号码" autocomplete="off" class="layui-input" value="{{mt_rand(100, 999)}}" />
     </div>
 </div>
 <div class="layui-row layui-form-item">
