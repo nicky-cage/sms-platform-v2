@@ -269,6 +269,7 @@ class MessagesController extends BaseController
         $channelID = $merchant->channel_list ?? 0;
         $orderNumber = Utils::getOrderNumber('NP');
         $phoneFull = '+'. $country->phone_prefix. ' '. $postedData['receiver_number'];
+        $currentTime = time() * 1000 * 1000;
         $savingData = [
             'merchant_id' => $merchantApp->merchant_id,
             'merchant_name' => $merchantApp->merchant_name,
@@ -281,7 +282,7 @@ class MessagesController extends BaseController
             'sender_number' => trim($postedData['sender_number'] ?? ''),
             'phone_prefix' => $country->phone_prefix,
             'phone_full' => $phoneFull,
-            'created' => time() * 1000 * 1000,
+            'created' => $currentTime,
             'template_id' => $templateID,
             'content' => $content,
             'notify_url' => trim($postedData['notify_url'] ?? ''),
@@ -296,7 +297,7 @@ class MessagesController extends BaseController
         ]);
 
         $row = Message::query()->where(['order_number' => $orderNumber])->first()->toArray();
-        $row['created'] = intval($row['created']);
+        $row['created'] = $currentTime;
         Message::pushForSend($row);
 
         $returnData = [
