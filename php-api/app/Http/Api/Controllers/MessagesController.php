@@ -291,8 +291,8 @@ class MessagesController extends BaseController
             'id' => $merchantAcc->id,
             'merchant_id' => $merchant->id,
         ])->update([
-            'count_remain' => $merchantAcc->remain - 1,
-            'count_frozen' => $merchantAcc->frozen + 1,
+            'count_remain' => $merchantAcc->count_remain - 1,
+            'count_frozen' => $merchantAcc->count_frozen + 1,
         ]);
         Message::pushForSend($savingData);
 
