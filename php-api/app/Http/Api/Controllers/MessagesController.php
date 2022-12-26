@@ -281,7 +281,7 @@ class MessagesController extends BaseController
             'sender_number' => trim($postedData['sender_number'] ?? ''),
             'phone_prefix' => $country->phone_prefix,
             'phone_full' => $phoneFull,
-            'created' => time(),
+            'created' => time() * 1000 * 1000,
             'template_id' => $templateID,
             'content' => $content,
             'notify_url' => trim($postedData['notify_url'] ?? ''),
@@ -296,6 +296,7 @@ class MessagesController extends BaseController
         ]);
 
         $row = Message::query()->where(['order_number' => $orderNumber])->first()->toArray();
+        $row['created'] = intval($row['created']);
         Message::pushForSend($row);
 
         $returnData = [
