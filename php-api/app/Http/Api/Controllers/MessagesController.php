@@ -11,6 +11,7 @@ use Hyperf\HttpServer\Annotation\{Controller, GetMapping, RequestMapping};
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\View\RenderInterface;
 use Psr\Http\Message\ResponseInterface;
+use Hyperf\DbConnection\Db;
 
 #[Controller(prefix: "/v2")]
 class MessagesController extends BaseController
