@@ -154,7 +154,7 @@ class MessagesController extends BaseController
             'merchant_id' => $merchantApp->merchant_id,
         ])->first();
         if ($merchantAcc) {
-            $data['remain_count'] = $merchantAcc->remain_count;
+            $data['remain_count'] = $merchantAcc->count_remain ?? 0;
             $data['remain'] = $merchantAcc->remain;
         }
 
