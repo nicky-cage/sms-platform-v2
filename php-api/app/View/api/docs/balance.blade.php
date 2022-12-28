@@ -150,14 +150,14 @@
 <div class="layui-row layui-form-item">
     <label class="layui-form-label">APP KEY</label>
     <div class="layui-input-inline" style="width: 75%">
-        <input name="app_key" placeholder="请输入APP KEY" autocomplete="off" class="layui-input" value="{{$app_key}}" />
+        <input name="app_key" id="app_key" placeholder="请输入APP KEY" autocomplete="off" class="layui-input" value="{{$app_key}}" />
     </div>
 </div>
 <div class="layui-row layui-form-item">
     <div class="layui-col-lg6">
         <label class="layui-form-label">应用编号</label>
         <div class="layui-input-inline">
-            <input name="app_id" lay-verify="required" placeholder="请输入应用编号" autocomplete="off" class="layui-input" value="{{$app_id}}" />
+            <input name="app_id" id="app_id" lay-verify="required" placeholder="请输入应用编号" autocomplete="off" class="layui-input" value="{{$app_id}}" />
         </div>
     </div>
     <div class="layui-col-lg6"> &nbsp; </div>
