@@ -129,24 +129,11 @@ class MessagesController extends BaseController
     }
 
     /**
-     * @param RequestInterface $request
-     * @param RenderInterface $render
-     * @param string $message
-     * @return ResponseInterface
-     */
-    protected static function error(RequestInterface $request, RenderInterface $render, string $message = '程序执行发生错误'): ResponseInterface
-    {
-        return self::render($request, $render, [
-            'message' => $message,
-        ], 'error');
-    }
-
-    /**
      * 查询账户余额
      * @param RequestInterface $request
      * @return array
      */
-    #[GetMapping(path: "balance")]
+    #[RequestMapping(path: "balance", methods: 'get, post')]
     public function balance(RequestInterface $request): array
     {
         $postedData = $request->all(); // 提交数据
