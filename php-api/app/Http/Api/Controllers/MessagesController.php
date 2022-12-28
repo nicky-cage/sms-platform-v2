@@ -226,7 +226,7 @@ class MessagesController extends BaseController
             if ($key == 'sign' || $value == '') {
                 continue;
             }
-            $signStr .= "${key}=${value}&";
+            $signStr .= trim($key). '='. trim($value) .'&';
         }
         $signStr .= "key=${appKey}";
         if ($sign != md5($signStr)) {
