@@ -47,7 +47,7 @@
             }
         });
         sign_str += 'key=' + key;
-        console.log(sign_str);
+        //console.log(sign_str);
         return md5(sign_str);
     };
 </script>
