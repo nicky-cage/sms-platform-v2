@@ -231,6 +231,7 @@ class MessagesController extends BaseController
         $signCurrent = md5($signStr);
         print_r([
             'sign' => $sign,
+            'sign_str' => $signStr,
             'sign_current' => $signCurrent,
             'data' => $data,
         ]);
