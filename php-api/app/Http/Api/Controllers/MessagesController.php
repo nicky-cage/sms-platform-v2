@@ -223,7 +223,7 @@ class MessagesController extends BaseController
      */
     private static function checkSign(array $data, string &$errMsg): ?Merchantapp {
         $appId = intval($data['app_id']);
-        $merchantApp = MerchantApp::query()->find($appId);
+        $merchantApp = MerchantApp::query()->where(['id' => $appId])->first();
         if (!$merchantApp) {
             $errMsg =  '商户相关信息检测失败';
             return null;

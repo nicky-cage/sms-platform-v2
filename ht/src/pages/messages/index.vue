@@ -84,9 +84,10 @@ export default {
             },
             columns: [
                 {title: "ID", dataIndex: 'id', width: 80},
-                {title: "商户名称", dataIndex: 'merchant_name', width: 120},
+                {title: "订单编号", dataIndex: 'order_number', width: 180},
+                {title: "商户名称", dataIndex: 'merchant_name', width: 80},
                 {title: "渠道代码", dataIndex: 'channel_id', width: 80},
-                {title: "回执编号", dataIndex: 'message_id', width: 235},
+                {title: "回执编号", dataIndex: 'message_id', width: 230},
                 {title: "手机号码", dataIndex: 'phone_full', width: 140},
                 {title: "状态", dataIndex: 'state', scopedSlots: {customRender: 'state'}, width: 60 },
                 {title: "检测", dataIndex: 'failure', width: 60},
