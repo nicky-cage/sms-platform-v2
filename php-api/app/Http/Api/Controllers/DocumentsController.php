@@ -75,7 +75,7 @@ class DocumentsController extends BaseController
     {
         return self::render($request, $render, array_merge([
             'url' => self::getAPIDomain() . '/v2/message_query',
-        ], self::getViewData($request)), 'docs/message_query');
+        ], self::getViewData($request)), 'docs/query');
     }
 
     #[RequestMapping(path: 'info', methods: 'GET, POST')]

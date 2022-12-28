@@ -26,11 +26,13 @@ use App\Common\{Cache};
  * @property string $message_id
  * @property string $notify_url
  * @property int $notify_failure
+ * @property int $notify_confirmed
  * @property int $created
  * @property int $send_time
  * @property int $failure
  * @property int $sent_time
  * @property string $remark
+ * @property string $sender_number
  */
 class Message extends Model
 {

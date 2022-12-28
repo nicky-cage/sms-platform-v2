@@ -27,7 +27,7 @@ class MessagesController extends BaseController
     // 348193
 
     /**
-     * 查询订单信息
+     * 查询商户信息
      * @param RequestInterface $request
      * @param RenderInterface $render
      * @return array
@@ -42,25 +42,88 @@ class MessagesController extends BaseController
         if (!isset($postedData['sign'])) { // 缺少签名
             return self::jsonErr('缺少下单签名');
         }
+
+        // 检测签名相关
+        $errMsg = '';
+        $merchantApp = self::checkSign($postedData, $errMsg);
+        if ($errMsg) {
+            return self::jsonErr($errMsg);
+        }
+
+        $appId = intval($postedData['app_id']);
+        $data = [
+            'app_id' => $appId,
+            'merchant_id' => $merchantApp->merchant_id,
+            'merchant_name' => $merchantApp->merchant_name,
+        ];
+
+        $merchantAcc = MerchantAccount::query()->where([
+            'merchant_id' => $merchantApp->merchant_id,
+        ])->first();
+        if ($merchantAcc) {
+            $data['remain'] = $merchantAcc->remain;
+        }
+
+        $sign = Utils::getSign($data, $merchantApp->app_key);
+        $data['sign'] = $sign;
+
+        return self::jsonResult($data);
+    }
+
+    /**
+     * 查询订单信息
+     * @param RequestInterface $request
+     * @param RenderInterface $render
+     * @return array
+     */
+    #[RequestMapping(path: "message_query", methods: "get, post")]
+    public function messageQuery(RequestInterface $request, RenderInterface $render): array
+    {
+        $postedData = $request->all(); // 提交数据
+        if (!isset($postedData['app_id']) || !is_numeric($postedData['app_id'])) { // 必须提供商户编号
+            return self::error($request, $render, '缺少商户编号');
+        }
+        if (!isset($postedData['sign'])) { // 缺少签名
+            return self::jsonErr('缺少下单签名');
+        }
         if (!isset($postedData['order_number'])) { // 发起方订单号码
             return self::error($request, $render, '缺少订单编号信息');
         }
-        if (!isset($postedData['time']) || !is_numeric($postedData['time'])) { // 提交时间
-            return self::jsonErr('缺少下单时间信息时间');
-        }
-        $time = $postedData['time'];
-        if (!is_numeric($time) || $time < time() - 300) { // 必须在10秒内处理
-            return self::jsonErr('订单时间不对或者下单超时');
-        }
 
         // 检测签名相关
-        $appId = $postedData['app_id'];
-        $merchantApp = MerchantApp::query()->find($appId);
-        if (!$merchantApp) {
-            return self::jsonErr('商户相关信息检测失败');
+        $errMsg = '';
+        $merchantApp = self::checkSign($postedData, $errMsg);
+        if ($errMsg) {
+            return self::jsonErr($errMsg);
         }
 
-        return self::jsonOk();
+        $appID = intval($postedData['app_id']);
+        $message = Message::query()->where([
+            'app_id' => $appID,
+            'order_number' => trim($postedData['order_number']),
+        ])->first();
+        if (!$message) {
+            return self::jsonErr('订单编号无效');
+        }
+
+        $data = [
+            'app_id' => $appID,
+            'merchant_id' => $merchantApp->merchant_id,
+            'merchant_name' => $merchantApp->merchant_name,
+            'order_number' => $message->order_number,
+            'message_id' => $message->message_id,
+            'status' => $message->state,
+            'phone_prefix' => $message->phone_prefix,
+            'phone' => $message->phone,
+            'phone_full' => $message->phone_full,
+            'template_id' => $message->template_id,
+            'created' => $message->created,
+            'sent_time' => $message->sent_time,
+            'sender_number' => $message->sender_number,
+            'notify_confirmed' => $message->notify_confirmed,
+        ];
+
+        return self::jsonResult($data);
     }
 
     /**
@@ -84,7 +147,6 @@ class MessagesController extends BaseController
     #[GetMapping(path: "balance")]
     public function balance(RequestInterface $request): array
     {
-        // ------------------ 数据检测 ---------------------------------- //
         $postedData = $request->all(); // 提交数据
         if (!isset($postedData['app_id']) || !is_numeric($postedData['app_id'])) { // 必须提供商户编号
             return self::jsonErr('缺少商户编号');
@@ -92,16 +154,29 @@ class MessagesController extends BaseController
         if (!isset($postedData['sign'])) { // 缺少签名
             return self::jsonErr('缺少下单签名');
         }
-        if (!isset($postedData['time'])) { // 提交时间
-            return self::jsonErr('缺少下单时间信息时间');
-        }
-        $time = $postedData['time'];
-        if (!is_numeric($time) || $time < time() - 300) { // 必须在10秒内处理
-            return self::jsonErr('订单时间不对或者下单超时');
+
+        // 检测签名相关
+        $errMsg = '';
+        $merchantApp = self::checkSign($postedData, $errMsg);
+        if ($errMsg) {
+            return self::jsonErr($errMsg);
         }
 
-        // ------------------ 数据处理 ---------------------------------- //
-        return self::jsonOk();
+        $appID = intval($postedData['app_id']);
+        $data = [
+            'app_id' => $appID,
+            'merchant_id' => $merchantApp->merchant_id,
+            'merchant_name' => $merchantApp->merchant_name,
+        ];
+
+        $merchantAcc = MerchantAccount::query()->where([
+            'merchant_id' => $merchantApp->merchant_id,
+        ])->first();
+        if ($merchantAcc) {
+            $data['remain_count'] = $merchantAcc->remain_count;
+        }
+
+        return self::jsonResult($data);
     }
 
     /**
