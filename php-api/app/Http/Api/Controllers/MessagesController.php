@@ -99,7 +99,7 @@ class MessagesController extends BaseController
 
         $appID = intval($postedData['app_id']);
         $message = Message::query()->where([
-            'app_id' => $appID,
+            'merchant_id' => $merchantApp->merchant_id,
             'order_number' => trim($postedData['order_number']),
         ])->first();
         if (!$message) {
@@ -349,8 +349,8 @@ class MessagesController extends BaseController
             'merchant_id' => $merchantApp->merchant_id,
             'merchant_name' => $merchantApp->merchant_name,
             'app_id' => $merchantApp->id,
-            'channel_id' => $channelID,
             'app_name' => $merchantApp->name,
+            'channel_id' => $channelID,
             'order_number' => $orderNumber,
             'country_id' => $country->id,
             'phone' => trim($postedData['receiver_number']),
