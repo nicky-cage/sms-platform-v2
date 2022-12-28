@@ -175,4 +175,21 @@
     </div>
 </div>
 @endcomponent
+<script src="/static/js/md5.min.js"></script>
+<script>
+    layui.use(['jquery', 'layer'], function() {
+        let $ = layui.jquery,
+            this_form = $(".form-api:first"),
+            this_url = this_form.attr("action");
+
+        // 提交结果
+        $(document).on("click", ".btn-submit", function() {
+            let param = get_params(this_form.serializeArray());
+            param['sign'] = get_sign(param, $("#app_key").val());
+            sp.post(this_url, param, function(result) {
+                $("#request_result").html(JSON.stringify(result));
+            });
+        });
+    });
+</script>
 @endsection

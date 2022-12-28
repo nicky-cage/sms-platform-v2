@@ -128,6 +128,11 @@
                     <td>订单编号</td>
                 </tr>
                 <tr>
+                    <td>data.template_id</td>
+                    <td>string</td>
+                    <td>模板编号</td>
+                </tr>
+                <tr>
                     <td>data.message_id</td>
                     <td>string</td>
                     <td>订单编号 - 渠道</td>
@@ -135,7 +140,7 @@
                 <tr>
                     <td>data.status</td>
                     <td>int</td>
-                    <td>状态</td>
+                    <td>状态 0:待发送 1:成功 2:失败</td>
                 </tr>
                 <tr>
                     <td>data.send_time</td>
@@ -143,9 +148,34 @@
                     <td>发送时间</td>
                 </tr>
                 <tr>
-                    <td>data.finished</td>
+                    <td>data.sent_time</td>
                     <td>int</td>
-                    <td>完成时间</td>
+                    <td>完成发送时间</td>
+                </tr>
+                <tr>
+                    <td>data.phone</td>
+                    <td>string</td>
+                    <td>电话号码</td>
+                </tr>
+                <tr>
+                    <td>data.phone_prefix</td>
+                    <td>string</td>
+                    <td>电话区号</td>
+                </tr>
+                <tr>
+                    <td>data.phone_full</td>
+                    <td>string</td>
+                    <td>完整电话号码</td>
+                </tr>
+                <tr>
+                    <td>data.merchant_id</td>
+                    <td>string</td>
+                    <td>商户编号</td>
+                </tr>
+                <tr>
+                    <td>data.merchant_name</td>
+                    <td>string</td>
+                    <td>商户名称</td>
                 </tr>
                 <tr>
                     <td>data.sign</td>

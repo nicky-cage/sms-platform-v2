@@ -122,6 +122,8 @@ class MessagesController extends BaseController
             'sender_number' => $message->sender_number,
             'notify_confirmed' => $message->notify_confirmed,
         ];
+        $sign = Utils::getSign($data, $merchantApp->app_key);
+        $data['sign'] = $sign;
 
         return self::jsonResult($data);
     }
