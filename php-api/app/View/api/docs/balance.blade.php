@@ -117,9 +117,14 @@
                     <td>操作结果</td>
                 </tr>
                 <tr>
-                    <td>data.balance</td>
-                    <td>string</td>
-                    <td>订单编号</td>
+                    <td>data.remain</td>
+                    <td>float</td>
+                    <td>账户余额</td>
+                </tr>
+                <tr>
+                    <td>data.remain_count</td>
+                    <td>int</td>
+                    <td>可用短信总数</td>
                 </tr>
                 <tr>
                     <td>data.sign</td>
@@ -138,7 +143,8 @@
     "code": 0,
     "message": "",
     "data": {
-        "balance": 11,
+        "remain": 11.11,
+        "remain_count": 11,
         "sign":"0e63c8fa39f5c983010035a7d1d30e52",
     }
 }

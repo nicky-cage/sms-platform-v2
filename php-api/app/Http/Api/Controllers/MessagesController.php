@@ -56,13 +56,6 @@ class MessagesController extends BaseController
             'merchant_name' => $merchantApp->merchant_name,
         ];
 
-        $merchantAcc = MerchantAccount::query()->where([
-            'merchant_id' => $merchantApp->merchant_id,
-        ])->first();
-        if ($merchantAcc) {
-            $data['remain'] = $merchantAcc->remain;
-        }
-
         $sign = Utils::getSign($data, $merchantApp->app_key);
         $data['sign'] = $sign;
 
@@ -162,6 +155,7 @@ class MessagesController extends BaseController
         ])->first();
         if ($merchantAcc) {
             $data['remain_count'] = $merchantAcc->remain_count;
+            $data['remain'] = $merchantAcc->remain;
         }
 
         return self::jsonResult($data);
