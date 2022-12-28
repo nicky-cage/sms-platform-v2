@@ -139,7 +139,7 @@ class MessagesController extends BaseController
         // 检测签名相关
         $errMsg = '';
         $merchantApp = self::checkSign($postedData, $errMsg);
-        if ($merchantApp) {
+        if (!$merchantApp) {
             return self::jsonErr($errMsg);
         }
 
