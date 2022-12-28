@@ -117,7 +117,7 @@ class MessagesController extends BaseController
             'phone' => $message->phone,
             'phone_full' => $message->phone_full,
             'template_id' => $message->template_id,
-            'created' => $message->created,
+            'created' => $message->send_time,
             'sent_time' => $message->sent_time,
             'sender_number' => $message->sender_number,
             'notify_confirmed' => $message->notify_confirmed,
