@@ -43,10 +43,9 @@ class MessagesController extends BaseController
             return self::jsonErr('缺少下单签名');
         }
 
-        // 检测签名相关
         $errMsg = '';
         $merchantApp = self::checkSign($postedData, $errMsg);
-        if ($errMsg) {
+        if (!$merchantApp) {
             return self::jsonErr($errMsg);
         }
 
@@ -147,7 +146,7 @@ class MessagesController extends BaseController
         // 检测签名相关
         $errMsg = '';
         $merchantApp = self::checkSign($postedData, $errMsg);
-        if ($errMsg) {
+        if ($merchantApp) {
             return self::jsonErr($errMsg);
         }
 
@@ -229,7 +228,13 @@ class MessagesController extends BaseController
             $signStr .= trim($key). '='. trim($value) .'&';
         }
         $signStr .= "key=${appKey}";
-        if ($sign != md5($signStr)) {
+        $signCurrent = md5($signStr);
+        print_r([
+            'sign' => $sign,
+            'sign_current' => $signCurrent,
+            'data' => $data,
+        ]);
+        if ($sign != $signCurrent) {
             $errMsg = '签名验证失败';
             return null;
         }
