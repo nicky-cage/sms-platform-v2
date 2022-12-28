@@ -225,7 +225,7 @@ class MessagesController extends BaseController
         $appId = intval($data['app_id']);
         $merchantApp = MerchantApp::query()->where(['id' => $appId])->first();
         if (!$merchantApp) {
-            $errMsg =  '商户相关信息检测失败';
+            $errMsg =  '商户相关信息[应用]无效';
             return null;
         }
 
