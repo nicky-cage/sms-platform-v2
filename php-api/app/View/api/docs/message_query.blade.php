@@ -2,8 +2,8 @@
 
 @section('content')
 @component('api._slots.panel')
-<h1>商户余额</h1><br />
-<h2>一 商户余额</h2><br />
+<h1>短信查询</h1><br />
+<h2>一 短信查询</h2><br />
 <h3>1.1 请求说明：</h3><br />
 <div class="layui-row">
     <div class="layui-col-md12">
@@ -196,9 +196,13 @@
     "data": {
         "order_number": "xxx",
         "message_id": "xxx",
+        "template_id": "xxx",
         "status": "1",
+        "created": "",
         "send_time": "",
-        "finished": "",
+        "sent_time": "",
+        "merchant_id": "",
+        "merchant_name": "",
         "sign":"0e63c8fa39f5c983010035a7d1d30e52",
     }
 }
