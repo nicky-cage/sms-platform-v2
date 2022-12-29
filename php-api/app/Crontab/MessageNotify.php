@@ -8,7 +8,7 @@ use App\Model\Message;
 use Hyperf\Crontab\Annotation\Crontab;
 use Hyperf\DbConnection\Db;
 
-#[Crontab(rule: "*\/2 * * * * *", name: "OrderNotify", callback: "execute", memo: "订单异步通知", enable: true)]
+#[Crontab(rule: "*\/2 * * * * *", name: "MessageNotify", callback: "execute", memo: "短信异步通知", enable: true)]
 class MessageNotify
 {
     public function execute()
