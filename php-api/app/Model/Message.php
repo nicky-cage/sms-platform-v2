@@ -55,10 +55,10 @@ class Message extends Model
     }
 
     // 回调错误处理
-    public function notifyErr(string $remark)
+    public function notifyErr(string $remark, int $failureCount = 1)
     {
         Db::table('messages')->where(['id' => $this->id])->update([
-            'notify_failure' => $this->notify_failure + 1,
+            'notify_failure' => $this->notify_failure + $failureCount,
             'remark' => $remark,
         ]);
     }
@@ -73,14 +73,14 @@ class Message extends Model
 
         $notifyURL = $this->notify_url;
         if (!Str::startsWith($notifyURL, 'https://') || Str::startsWith($notifyURL, 'http://')) {
-            $this->notifyErr("通知地址无效: ${notifyURL}");
+            $this->notifyErr("通知地址无效: ${notifyURL}", 11);
             echo "[订单]通知地址无效: ", $notifyURL, "\n";
             return;
         }
 
         $app = Db::table('merchant_apps')->where(['id' => $this->app_id])->first();
         if (!$app) {
-            $this->notifyErr('缺少应用信息:' . $this->app_id);
+            $this->notifyErr('缺少应用信息:' . $this->app_id, 21);
             echo "[订单]缺少应用信息 \n";
             return;
         }

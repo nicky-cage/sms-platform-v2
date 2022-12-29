@@ -19,7 +19,7 @@ class MessageNotify
             ['notify_failure', '<', 10],
             ['created', '>', time() - 86400 * 3],
         ];
-        $rows = Message::query()->where($cond)->orderBy('id', 'desc')->limit(100)->get();
+        $rows = Message::query()->where($cond)->orderBy('id', 'desc')->limit(500)->get();
         foreach ($rows as $row) {
             $row->notify();
         }
