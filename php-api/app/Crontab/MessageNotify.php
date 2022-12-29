@@ -17,8 +17,9 @@ class MessageNotify
             ['state', '=', 1],
             ['notify_confirmed', '=', 0],
             ['notify_failure', '<', 10],
+            ['notify_url', '!=', ''],
         ];
-        $rows = Message::query()->where($cond)->limit(100)->get();
+        $rows = Message::query()->where($cond)->orderBy('id', 'desc')->limit(100)->get();
         foreach ($rows as $row) {
             $row->notify();
         }
