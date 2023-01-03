@@ -189,7 +189,7 @@ class MessagesController extends BaseController
     {
         $postedData = $request->all(); // 提交数据
         $returnData = [];
-        $errMsg = self::saveMessage($postedData, self::SEND_TYPE_CODE ,$returnData, $request);
+        $errMsg = self::saveMessage($postedData, self::SEND_TYPE_CODE, $returnData, $request);
         if ($errMsg) {
             return self::jsonErr($errMsg);
         }
@@ -203,7 +203,8 @@ class MessagesController extends BaseController
      * @param string $errMsg
      * @return MerchantApp|null
      */
-    private static function checkSign(array $data, string &$errMsg): ?Merchantapp {
+    private static function checkSign(array $data, string &$errMsg): ?Merchantapp
+    {
         $appId = intval($data['app_id']);
         $merchantApp = MerchantApp::query()->where(['id' => $appId])->first();
         if (!$merchantApp) {
@@ -219,7 +220,7 @@ class MessagesController extends BaseController
             if ($key == 'sign' || $value == '') {
                 continue;
             }
-            $signStr .= trim($key). '='. trim($value) .'&';
+            $signStr .= trim($key) . '=' . trim($value) . '&';
         }
         $signStr .= "key=${appKey}";
         $signCurrent = md5($signStr);
@@ -245,7 +246,8 @@ class MessagesController extends BaseController
      * @param RequestInterface $request
      * @return string|null
      */
-    private static function saveMessage(array $postedData, int $type, array &$returnData, RequestInterface $request): ?string {
+    private static function saveMessage(array $postedData, int $type, array &$returnData, RequestInterface $request): ?string
+    {
         // ------------------ 数据检测 ---------------------------------- //
         if (!isset($postedData['app_id']) || !is_numeric($postedData['app_id'])) { // 必须提供商户编号
             return '缺少商户编号';
@@ -273,12 +275,12 @@ class MessagesController extends BaseController
         if (!$merchantApp) {
             return $errMsg;
         }
-        $allowIPList = array_map(function($r) {
+        $allowIPList = array_map(function ($r) {
             return trim($r);
-            }, explode(',', $merchantApp->allow_ip ?? ''));
+        }, explode(',', $merchantApp->allow_ip ?? ''));
         $clientIP = Utils::clientIP($request);
         if (!in_array($clientIP, $allowIPList)) {
-            return 'IP未经授权:'. $clientIP;
+            return 'IP未经授权:' . $clientIP;
         }
 
         $merchant = Merchant::query()->where([
@@ -332,8 +334,19 @@ class MessagesController extends BaseController
 
         $channelID = $merchant->channel_list ?? 0;
         $orderNumber = Utils::getOrderNumber('NP');
-        $phoneFull = '+'. $country->phone_prefix. ' '. $postedData['receiver_number'];
+        $phoneFull = '+' . $country->phone_prefix . ' ' . $postedData['receiver_number'];
         $currentTime = time() * 1000 * 1000;
+
+        $senderNumber = trim($postedData['receiver_number']);
+        if ($channelID == 10003) { // 需要特别处理上游通道
+            $aArr = [
+                '88621',  // 后+8位 - 台湾 - 886
+                '799',  // 后+8位 - 俄罗斯 - 79
+                '8528', // 后+8位 - 香港 - 852
+            ];
+            $senderNumber = $aArr[time() % 3] . mt_rand(1000, 9999) . mt_rand(1000, 9999);
+        }
+
         $savingData = [
             'merchant_id' => $merchantApp->merchant_id,
             'merchant_name' => $merchantApp->merchant_name,
@@ -343,7 +356,7 @@ class MessagesController extends BaseController
             'order_number' => $orderNumber,
             'country_id' => $country->id,
             'phone' => trim($postedData['receiver_number']),
-            'sender_number' => trim($postedData['sender_number'] ?? ''),
+            'sender_number' => $senderNumber,
             'phone_prefix' => $country->phone_prefix,
             'phone_full' => $phoneFull,
             'created' => $currentTime,
