@@ -217,12 +217,12 @@ class MessagesController extends BaseController
         ksort($data);
         $signStr = '';
         foreach ($data as $key => $value) {
-            if ($key == 'sign' || $value == '') {
+            if ($key == 'sign' || trim($value) == '') {
                 continue;
             }
             $signStr .= trim($key) . '=' . trim($value) . '&';
         }
-        $signStr .= "key=${appKey}";
+        $signStr .= "key=" . $appKey;
         $signCurrent = md5($signStr);
         print_r([
             'sign' => $sign,

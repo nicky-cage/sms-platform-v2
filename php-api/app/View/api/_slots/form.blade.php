@@ -32,7 +32,7 @@
         let param = {};
         for (let k in data) {
             let item = data[k];
-            if (item.name == "app_key" || item.name == "sign") {
+            if (item.name == "app_key" || item.name == "sign" || item.value == "") {
                 continue;
             }
             param[item.name] = item.value;
