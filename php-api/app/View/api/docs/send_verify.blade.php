@@ -62,7 +62,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="text-align: left">receiver_number</td>
+                    <td>receiver_number</td>
                     <td>string</td>
                     <td style="text-align: left; padding: 0px 10px;">
                         接收手机号码, 必填<br />
