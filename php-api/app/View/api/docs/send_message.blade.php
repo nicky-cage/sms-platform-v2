@@ -53,7 +53,7 @@
                     <td>sender_number</td>
                     <td>string</td>
                     <td style="text-align: left; padding: 0px 10px;">
-                        发送方手机号码, 必填<br />
+                        发送方手机号码, 选填<br />
                         不同渠道有不同要求: <br />
                         中国联通: <br />
                         1. 要求sender_number 以79 、 886、 852 必须真实号码<br />
