@@ -52,7 +52,7 @@
                 <tr>
                     <td>sender_number</td>
                     <td>string</td>
-                    <td>发送方手机号码, 必填<br />
+                    <td style="text-align: left">发送方手机号码, 必填<br />
                         不同渠道有不同要求: <br />
                         中国联通: <br />
                         1. 要求sender id= 79 、 886、 852 必须真实OA, 不可以后缀 <br />
@@ -61,7 +61,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>receiver_number</td>
+                    <td style="text-align: left">receiver_number</td>
                     <td>string</td>
                     <td>接收手机号码, 必填<br />
                         不需要带国家前缀, 系统会自动判断
