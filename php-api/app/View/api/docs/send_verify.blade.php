@@ -72,7 +72,7 @@
                 <tr>
                     <td>code</td>
                     <td>int</td>
-                    <td>验证码, 必填</td>
+                    <td>验证码, 必填, 内容中以 ${code} 来代替具体的验证码</td>
                 </tr>
                 <tr>
                     <td>template_id</td>
