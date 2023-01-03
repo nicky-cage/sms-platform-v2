@@ -52,7 +52,7 @@
                 <tr>
                     <td>sender_number</td>
                     <td>string</td>
-                    <td style="text-align: left">
+                    <td style="text-align: left; padding: 0px 10px;">
                         发送方手机号码, 必填<br />
                         不同渠道有不同要求: <br />
                         中国联通: <br />
@@ -64,7 +64,7 @@
                 <tr>
                     <td>receiver_number</td>
                     <td>string</td>
-                    <td style="text-align: left">
+                    <td style="text-align: left; padding: 0px 10px;">
                         接收方手机号码, 必填<br />
                         不需要带国家前缀, 系统会自动判断
                     </td>
