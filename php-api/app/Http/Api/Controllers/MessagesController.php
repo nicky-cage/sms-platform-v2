@@ -337,6 +337,7 @@ class MessagesController extends BaseController
         $phoneFull = '+' . $country->phone_prefix . ' ' . $postedData['receiver_number'];
         $currentTime = time() * 1000 * 1000;
 
+        echo 'channel_id = ' . $channelID . "\n";
         $senderNumber = trim($postedData['sender_number']);
         if ($channelID == '10003') { // 需要特别处理上游通道
             $aArr = [
