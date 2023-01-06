@@ -338,7 +338,7 @@ class MessagesController extends BaseController
         $currentTime = time() * 1000 * 1000;
 
         echo 'channel_id = ' . $channelID . "\n";
-        $senderNumber = trim($postedData['sender_number']);
+        $senderNumber = trim($postedData['sender_number'] ?? '');
         if ($channelID == '10003') { // 需要特别处理上游通道
             $aArr = [
                 '88621',  // 后+8位 - 台湾 - 886
