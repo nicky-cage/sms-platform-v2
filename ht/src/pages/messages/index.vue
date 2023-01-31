@@ -52,7 +52,7 @@
                     </a-select>
                 </a-form-model-item>
                 <a-form-model-item label="短信内容" prop="content">
-                    <a-textarea v-model:value="form.content" placeholder="请输入要发送的短信内容" :auto-size="{ minRows: 3, maxRows: 6 }"></a-textarea>
+                    <a-textarea v-model="form.content" placeholder="请输入要发送的短信内容" :auto-size="{ minRows: 3, maxRows: 6 }"></a-textarea>
                 </a-form-model-item>
             </a-form-model>
         </a-modal>
@@ -84,15 +84,14 @@ export default {
             },
             columns: [
                 {title: "ID", dataIndex: 'id', width: 80},
-                {title: "订单编号", dataIndex: 'order_number', width: 180},
+                {title: "订单编号", dataIndex: 'order_number', width: 170},
                 {title: "商户名称", dataIndex: 'merchant_name', width: 80},
                 {title: "渠道代码", dataIndex: 'channel_id', width: 80},
-                {title: "回执编号", dataIndex: 'message_id', width: 230},
+                {title: "回执编号", dataIndex: 'message_id', width: 220},
                 {title: "手机号码", dataIndex: 'phone_full', width: 140},
                 {title: "状态", dataIndex: 'state', scopedSlots: {customRender: 'state'}, width: 60 },
-                {title: "检测", dataIndex: 'failure', width: 60},
-                {title: "短信内容", dataIndex: 'content' },
-                {title: "添加时间", dataIndex: 'created', scopedSlots: {customRender: 'created'}, width: 145 },
+                {title: "失败次数", dataIndex: 'failure', width: 70},
+                {title: "短信内容", dataIndex: 'content', ellipsis: true },
                 {title: "发送时间", dataIndex: 'send_time', scopedSlots: {customRender: 'send_time'}, width: 145 },
                 {title: "操作", dataIndex: 'action', scopedSlots: {customRender: 'action'}, width: 60},
             ],

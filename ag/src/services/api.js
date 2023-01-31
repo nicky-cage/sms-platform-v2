@@ -1,7 +1,7 @@
 // 跨域代理前缀
 //const HOST_LOCAL = 'http://127.0.0.1:8090/v1'; // 本地环境
 const HOST_LOCAL = "http://api.ag.sms.local/v1"; // 本地环境
-const HOST_TEST = "https://api.ag.sms.pusta.click/v1"; // 测试环境
+const HOST_TEST = "https://api.ag.sms.pelab.link/v1"; // 测试环境
 const IS_LOCAL =
     location.host.indexOf("local") > 0 ||
     location.host.indexOf("localhost") >= 0 ||

@@ -104,6 +104,23 @@ var CUG5 = CUGSender{
 	Direction: "",
 }
 
+// CUG6 六
+var CUG6 = CUGSender{
+	ProductType: "MKT_VERIFY",
+	ChannelName: "MKT_VERIFY",
+	ChannelType: "HTTP",
+	Path:        "/api",
+	IPList: []string{
+		"203.160.95.115",
+		"47.242.200.116",
+	},
+	Port:      8001,
+	Account:   "Deb1219mktm",
+	Password:  "9d7rP5KL",
+	TPS:       50,
+	Direction: "",
+}
+
 // Channels 渠道
 var Channels = map[string]CUGSender{
 	"CUG_SMPP":    CUG,
@@ -111,6 +128,7 @@ var Channels = map[string]CUGSender{
 	"CUG_HTTP_JK": CUG3,
 	"JKS_SMPP":    CUG4,
 	"MKT_HTTP_LT": CUG5,
+	"MKT_VERIFY":  CUG6,
 }
 
 // Server 服务器
@@ -134,5 +152,6 @@ var SMSServer = Server{
 		"CUG_HTTP_JK": CUG3,
 		"JKS_SMPP":    CUG4,
 		"LTS_HTTP":    CUG5,
+		"MKT_VERIFY":  CUG6,
 	},
 }

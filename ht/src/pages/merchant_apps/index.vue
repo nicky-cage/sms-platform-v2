@@ -68,7 +68,6 @@
 <script>
 import { crudService, PAGE_SIZE, BASE_URL } from '@/services/index.js';
 import { datetime_ms } from '@/utils/datetime.js';
-import { getAuthorization } from "@/utils/request";
 
 export default {
     name: "MerchantApps",
@@ -79,7 +78,7 @@ export default {
             is_creating: false,
             confirmLoading: false,
             search: {page: 1, page_size: PAGE_SIZE, merchant_name: "", state: "", remark: "", name: ""},
-            form: { merchant_id: "", name: "", state: 1, remark: "", allow_ip: "", remark: "" },
+            form: { merchant_id: "", name: "", state: 1, allow_ip: "", remark: "" },
             time_start: null, 
             time_end: null,
             rules: {
@@ -91,10 +90,10 @@ export default {
             },
             columns: [
                 {title: "ID", dataIndex: 'id', width: 80},
-                {title: "商户名称", dataIndex: 'merchant_name', width: 150},
-                {title: "应用名称", dataIndex: 'name', width: 150},
+                {title: "商户名称", dataIndex: 'merchant_name', width: 120},
+                {title: "应用名称", dataIndex: 'name', width: 180},
                 {title: "状态", dataIndex: 'state', scopedSlots: {customRender: 'status'}, width: 60},
-                {title: "授权IP", dataIndex: 'allow_ip', width: 250},
+                {title: "授权IP", dataIndex: 'allow_ip', width: 350, ellipsis: true},
                 {title: "应用密钥", dataIndex: 'app_key', width: 300},
                 {title: "备注", dataIndex: 'remark',  ellipsis: true },
                 {title: "添加时间", dataIndex: 'created', scopedSlots: {customRender: 'created'}, width: 145},
@@ -139,7 +138,7 @@ export default {
             this.pagination.current = 1;
             this.getTableData();
         },
-        recordUpdate(r) {
+        rowUpdate(r) {
             this.is_creating = false;
             this.title = '修改记录';
             this.form.id = r.id

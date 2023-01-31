@@ -1,9 +1,9 @@
 #!/bin/bash
 
-key_file='~/.ssh/test.tianji.pem'
+key_file='~/.ssh/pelab.pem'
 remote_user='ubuntu'
-remote_host='tianji.test'
-remote_path='/data/www/sms.pusta.click/'
+remote_host='pelab'
+remote_path='/data/www/sms.pelab.link/'
 tar_file='dist.tar.gz'
 
 # 开始上传
@@ -26,7 +26,7 @@ function start_upload() {
 
 	# 登录 -> 删掉原目录 -> 解压 -> 覆盖原目录 -> 删除源文件
 	ssh -i $key_file ${remote_user}@${remote_host} > /dev/null 2>&1 << COMMAND
-		cd /data/www/sms.pusta.click
+		cd /data/www/sms.pelab.link
 		if [[ -d ht ]]; then
 			rm -rf ht
 		fi
