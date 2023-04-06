@@ -47,3 +47,5 @@ php-api/.php_cs.cache
 php-api/run.log
 php-api/.DS_Store
 php-api/redis.conf
+
+api/admin-api/src/tmp/

@@ -20,10 +20,8 @@ fi
 
 # 本地运行 - 位于src目录执行
 run_local() {
-    if [[ -e ~/go/bin/realize ]]; then
-        ~/go/bin/realize start
-    elif [[ -e ~/.go/bin/realize ]]; then
-        ~/.go/bin/realize start
+    if [[ -e ~/go/bin/air ]]; then
+        air
     else
         echo "缺少文件: realize"
     fi

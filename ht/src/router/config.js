@@ -117,6 +117,19 @@ const options = {
                     ],
                 },
                 {
+                    path: "mobile_manage",
+                    name: "充值管理",
+                    meta: { icon: "book", },
+                    component: BlankView,
+                    children: [
+                        {
+                            path: "mobile_recharges",
+                            name: "充值列表",
+                            component: () => import("@/pages/mobile_recharges/index"),
+                        },
+                    ],
+                },
+                {
                     path: "sms_manage",
                     name: "短信管理",
                     meta: { icon: "message" },

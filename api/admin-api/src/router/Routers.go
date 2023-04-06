@@ -20,6 +20,7 @@ import (
 	"admin-api/controllers/messagechannels"
 	"admin-api/controllers/messages"
 	"admin-api/controllers/messagetemplates"
+	"admin-api/controllers/mobilerecharges"
 	"admin-api/controllers/notices"
 	"admin-api/controllers/parametergroups"
 	"admin-api/controllers/parameters"
@@ -87,20 +88,25 @@ func Init(router *gin.Engine) {
 		auth.GET("/admin_roles", adminroles.Index.List)                      //
 		auth.GET("/admin_logs", adminlogs.Index.List)                        //
 		auth.GET("/admin_login_logs", adminloginlogs.Index.List)             //
-		auth.GET("/banks", banks.List.List)                                  //
-		auth.POST("/banks/save", banks.Save.Save)                            //
-		auth.GET("/countries", countries.Index.List)                         //
-		auth.POST("/countries/save", countries.Save.Save)                    //
-		auth.POST("/countries/save_rate", countries.SaveRate)                //
-		auth.GET("/provinces", provinces.Index.List)                         //
-		auth.POST("/provinces/save", provinces.Save.Save)                    //
-		auth.GET("/cities", cities.Index.List)                               //
-		auth.POST("/cities/save", cities.Save.Save)                          //
-		auth.GET("/districts", districts.Index.List)                         //
-		auth.POST("/districts/save", districts.Save.Save)                    //
-		auth.GET("/permission_ips", permissionips.Index.List)                //
-		auth.POST("/permission_ips/save", permissionips.Save.Save)           //
-		auth.GET("/report_merchants", reportmerchants.Index.List)            //
-		auth.GET("/report_counts", reportcounts.Index.List)                  //
+
+		auth.GET("/banks", banks.List.List)       // 银行列表
+		auth.POST("/banks/save", banks.Save.Save) // 银行 - 保存
+
+		auth.GET("/countries", countries.Index.List)               //
+		auth.POST("/countries/save", countries.Save.Save)          //
+		auth.POST("/countries/save_rate", countries.SaveRate)      //
+		auth.GET("/provinces", provinces.Index.List)               //
+		auth.POST("/provinces/save", provinces.Save.Save)          //
+		auth.GET("/cities", cities.Index.List)                     //
+		auth.POST("/cities/save", cities.Save.Save)                //
+		auth.GET("/districts", districts.Index.List)               //
+		auth.POST("/districts/save", districts.Save.Save)          //
+		auth.GET("/permission_ips", permissionips.Index.List)      //
+		auth.POST("/permission_ips/save", permissionips.Save.Save) //
+		auth.GET("/report_merchants", reportmerchants.Index.List)  //
+		auth.GET("/report_counts", reportcounts.Index.List)        //
+
+		auth.GET("/mobile_recharges", mobilerecharges.Index.List)      // 充值话费 - 列表
+		auth.POST("/mobile_recharges/save", mobilerecharges.Save.Save) // 充值话费 - 保存
 	}
 }
